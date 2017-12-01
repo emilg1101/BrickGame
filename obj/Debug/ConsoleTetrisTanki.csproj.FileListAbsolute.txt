@@ -1,0 +1,6 @@
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/bin/Debug/ConsoleTetrisTanki.exe
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/bin/Debug/ConsoleTetrisTanki.pdb
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/obj/Debug/ConsoleTetrisTanki.csprojResolveAssemblyReference.cache
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/obj/Debug/ConsoleTetrisTanki.csproj.CoreCompileInputs.cache
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/obj/Debug/ConsoleTetrisTanki.exe
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/obj/Debug/ConsoleTetrisTanki.pdb
