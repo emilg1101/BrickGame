@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleTetrisTanki
+﻿namespace BrickGameEmulator
 {
     internal class Program
     {
@@ -9,7 +7,6 @@ namespace ConsoleTetrisTanki
         {  
             BrickGame brickGame = new BrickGame();
             brickGame.Start();
-            Console.ReadKey();
         }
     }
 }

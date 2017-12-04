@@ -1,35 +1,27 @@
 ﻿using System;
 
-namespace ConsoleTetrisTanki
+namespace BrickGameEmulator
 {
     public class Tanki : Game
     {
         private BGField bgField;
-        private SplashReader splashReader;
+        private BGSurface surface;
 
-        private int x = 0;
-        private int y = 0;
-        
-        public Tanki()
+        private bool isPause = false;
+
+        private int x = 5;
+        private int y = 5;
+
+        public void Create(BGSurface surface)
         {
+            this.surface = surface;
             bgField = new BGField(); 
-            splashReader = new SplashReader();
+            bgField.SetValueAtPosition(x, y, 1);
         }
 
-        public override void SplashScreen(BGSurface surface)
+        public void Run(ConsoleKey key)
         {
-            BGField[] frames = splashReader.Read("tanki.sph");
-            surface.SetSplash(frames);
-            surface.StartSplash();
-        }
-
-        public override void Start(BGSurface surface)
-        {
-            
-        }
-
-        public override void Run(BGSurface surface, ConsoleKey key)
-        {
+            if (isPause) return;
             if (key == ConsoleKey.UpArrow) Up();
             if (key == ConsoleKey.DownArrow) Down();
             if (key == ConsoleKey.RightArrow) Right();
@@ -38,10 +30,20 @@ namespace ConsoleTetrisTanki
             if (key == ConsoleKey.B) surface.Score = 0;
             surface.Render(bgField);
         }
-
-        public override void Pause(BGSurface surface)
+        
+        public void SplashScreen()
         {
-            
+            surface.SetSplash("tanki.sph");
+        }
+        
+        public void Start()
+        {
+            isPause = false;
+        }
+
+        public void Pause()
+        {
+            isPause = true;
         }
 
         public void Up()

@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace ConsoleTetrisTanki
+namespace BrickGameEmulator
 {
     public class SplashReader
     {
-        private int x; 
-        public SplashReader()
-        {
-            x = 5;
-        }
-
         public BGField[] Read(String filename)
         {
             List<BGField> frames = new List<BGField>();

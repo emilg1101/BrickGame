@@ -1,8 +1,11 @@
-﻿namespace ConsoleTetrisTanki
+﻿namespace BrickGameEmulator
 {
     public class BGField
     {
         private int[][] gameField;
+
+        private int fieldWidth = BGConstants.FIELD_WIDTH;
+        private int fieldHeight = BGConstants.FIELD_HEIGHT;
 
         public BGField(int[][] gameField)
         {
@@ -11,21 +14,21 @@
 
         public BGField()
         {
-            gameField = new int[BGConstants.gameFieldWidth][];
-            for (int i = 0; i < gameField.Length; i++)
+            gameField = new int[fieldWidth][];
+            for (int i = 0; i < fieldWidth; i++)
             {
-                gameField[i] = new int[BGConstants.gameFieldHeight];
+                gameField[i] = new int[fieldHeight];
             }
         }
 
         public int GetWidth()
         {
-            return gameField.Length;
+            return fieldWidth;
         }
 
         public int GetHeight()
         {
-            return gameField[0].Length;
+            return fieldHeight;
         }
 
         public int GetValueByPosition(int x, int y)

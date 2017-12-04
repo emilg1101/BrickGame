@@ -1,0 +1,6 @@
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/bin/Debug/BrickGameEmulator.exe
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/bin/Debug/BrickGameEmulator.pdb
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/obj/Debug/BrickGameEmulator.csprojResolveAssemblyReference.cache
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/obj/Debug/BrickGameEmulator.csproj.CoreCompileInputs.cache
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/obj/Debug/BrickGameEmulator.exe
+/home/emil1101/workspace/RiderProjects/ConsoleTetrisTanki/ConsoleTetrisTanki/obj/Debug/BrickGameEmulator.pdb

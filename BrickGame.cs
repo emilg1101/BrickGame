@@ -1,34 +1,42 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace ConsoleTetrisTanki
+namespace BrickGameEmulator
 {
     public class BrickGame
     {
-        private bool pause = false;
+        private bool isPause;
 
-        private BGLogger _logger;
-        private BGKeyController _bgKey;
-        private BGSurface _bgSurface;
+        private readonly BGLogger logger;
+        private readonly BGSurface surface;
 
-        private Thread gameThread;
-        private Thread keyThread;
+        private readonly Thread gameThread;
 
-        private ConsoleKey key;
-        
-        Game[] games = new Game[] {new Tanki()};
+        private readonly Game[] games;
+
+        private int game = 0;
+
+        private bool startNewGame = true;
 
         public BrickGame()
         {
-            _logger = new BGLogger(50, 0);
-            _bgSurface = new BGSurface(0, 0);
+            logger = new BGLogger(50, 0);
+            surface = new BGSurface(0, 0);
             gameThread = new Thread(new ThreadStart(Update));
+            games = new Game[] {new CarRun(), new Tanki()};
         }
-
+        
         public ConsoleKey ReadKey()
         {
-           return Console.ReadKey(true).Key; 
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo keyPressed = Console.ReadKey(true);
+                while (Console.KeyAvailable) { Console.ReadKey(true); }
+                
+                return keyPressed.Key;
+            }
+            
+            return ConsoleKey.A;
         }
 
         public void Start()
@@ -38,38 +46,67 @@ namespace ConsoleTetrisTanki
 
         public void Update()
         {
-            games[0].SplashScreen(_bgSurface);
             while (true)
             {
-                ConsoleKey key = ReadKey();
-                _logger.Log("key", key.ToString());
-                if (!_bgSurface.SplashIsPlaying)
+                if (startNewGame)
                 {
-                    games[0].Run(_bgSurface, key);
+                    games[game].Create(surface);
+                    games[game].SplashScreen();
+                    startNewGame = false;
+                }
+                
+                ConsoleKey key = ReadKey();
+                if (key != ConsoleKey.A) logger.Log("key", key.ToString());
+                if (!surface.SplashIsPlaying)
+                {
+                    games[game].Run(key);
                 }
                 else
                 {
-                    //Console.WriteLine(key);
-                    //if (key > 0) _bgSurface.StopSplash();
-                    _bgSurface.Render(null);
+                    if (key != ConsoleKey.A)
+                    {
+                        logger.Log("debug", "StopSplash()");
+                        surface.StopSplash();
+                    }
+                    
+                    surface.Render(null);
                 }
-                
-               
-                //games[0].SplashScreen(_bgSurface);
-                
-                /*if (key > 0)
+
+                if (key == ConsoleKey.P)
                 {
-                    _bgSurface.ShowSplash(null, false, 0);
-                    games[0].Run(_bgSurface, key);
-                }*/
-                if (key == ConsoleKey.P) continue;
+                    if (isPause)
+                    {
+                        isPause = false;
+                        surface.Pause(isPause);
+                        games[game].Start();
+                    }
+                    else
+                    {
+                        isPause = true;
+                        surface.Pause(isPause);
+                        games[game].Pause();
+                    }
+                    
+                }
+                if (key == ConsoleKey.PageUp) ChangeUpGame();
+                if (key == ConsoleKey.PageDown) ChangeDownGame();
+                if (key == ConsoleKey.S) games[game].SplashScreen();
                 if (key == ConsoleKey.Z) break;
-                Thread.Sleep(25); // min 25mls 
-               // _logger.Log("BG", "update()");
-
-                //if (key == BGKeyController.HotKeys.Pause) SetPause();
-
             }
+        }
+
+        private void ChangeUpGame()
+        {
+            game++;
+            if (game == games.Length) game = 0;
+            startNewGame = true;
+        }
+        
+        private void ChangeDownGame()
+        {
+            game--;
+            if (game == -1) game = games.Length - 1;
+            startNewGame = true;
         }
     }
 }

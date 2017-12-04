@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleTetrisTanki
+namespace BrickGameEmulator
 {
     public class BGLogger
     {
@@ -24,6 +24,8 @@ namespace ConsoleTetrisTanki
             if (startY + buffer == y + 1) y = startY;
             Console.SetCursorPosition(x, y);
             Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("                            ");
+            Console.SetCursorPosition(x, y);
             Console.WriteLine(line+":"+level + ": " + message);
             Console.ResetColor();
             y++;

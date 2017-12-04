@@ -1,15 +1,17 @@
 ﻿using System;
 
-namespace ConsoleTetrisTanki
+namespace BrickGameEmulator
 {
-    public abstract class Game
+    public interface Game
     {
-        public abstract void SplashScreen(BGSurface surface);
+        void Create(BGSurface surface);   
         
-        public abstract void Start(BGSurface surface);
+        void Run(ConsoleKey key);
         
-        public abstract void Run(BGSurface surface, ConsoleKey key);
+        void SplashScreen();
+        
+        void Start();
 
-        public abstract void Pause(BGSurface surface);
+        void Pause();
     }
 }
