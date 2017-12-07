@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Media;
 using System.Threading;
 
 namespace BrickGameEmulator
@@ -32,8 +33,11 @@ namespace BrickGameEmulator
         }
 
         private int splashPosition;
+        private int splashTimeOut = 25;
 
         private BGField[] splashFrames;
+
+        private SoundPlayer player;
 
         private bool splashIsPlaying = true;
 
@@ -47,10 +51,17 @@ namespace BrickGameEmulator
             Console.CursorVisible = false;
             
             _drawBorder(surfacePositionX, surfacePositionY);
+            
             PrintMessageAtPosition(27, 1, "HI-SCORE", ConsoleColor.White);
             PrintMessageAtPosition(27, 4, "SCORE", ConsoleColor.White);
             PrintMessageAtPosition(27, 7, "LEVEL", ConsoleColor.White);
             PrintMessageAtPosition(27, 10, "SPEED", ConsoleColor.White);
+            PrintMessageAtPosition(27, 15, "<--CONTROLS-->", ConsoleColor.Red);
+            PrintMessageAtPosition(27, 16, "P - Pause/Start", ConsoleColor.Green);
+            PrintMessageAtPosition(27, 17, "Pg Up - Next Game", ConsoleColor.Green);
+            PrintMessageAtPosition(27, 18, "Pg Dn - Previous Game", ConsoleColor.Green);
+            PrintMessageAtPosition(27, 19, "R - Reset", ConsoleColor.Green);
+            
             _renderStatusPanel();
         }
 
@@ -107,12 +118,12 @@ namespace BrickGameEmulator
                     int value = bgField.GetValueByPosition(i, j);
                     if (value == 0)
                     {
-                        PrintAtPosition(surfacePositionX + 2 + (i * 2), j + 1, "■", ConsoleColor.White);
+                        PrintAtPosition(surfacePositionX + 2 + (i * 2), j + 1, "▣", ConsoleColor.White);
                         PrintAtPosition(surfacePositionX + 2 + (i * 2 + 1), j + 1, borderSymbol, ConsoleColor.White);
                     }
                     else
                     {
-                        PrintAtPosition(surfacePositionX + 2 + (i * 2), j + 1, "■", ConsoleColor.Black);
+                        PrintAtPosition(surfacePositionX + 2 + (i * 2), j + 1, "▣", ConsoleColor.Black);
                         PrintAtPosition(surfacePositionX + 2 + (i * 2 + 1), j + 1, borderSymbol, ConsoleColor.White);
                     }
                     
@@ -156,6 +167,12 @@ namespace BrickGameEmulator
 
         public void SetSplash(string filename)
         {
+            SetSplash(filename, 20);
+        }
+
+        public void SetSplash(string filename, int timeout)
+        {
+            splashTimeOut = timeout;
             splashFrames = new SplashReader().Read(filename);
             StartSplash();
         }
@@ -181,7 +198,7 @@ namespace BrickGameEmulator
             }
             
             _render(splashFrames[splashPosition]);
-            Thread.Sleep(10);
+            Thread.Sleep(splashTimeOut);
             splashPosition++;
         }
 
@@ -197,6 +214,17 @@ namespace BrickGameEmulator
             }
         }
 
+        public void PlaySound(string filename)
+        {
+            player = new SoundPlayer(filename);
+            player.Play();
+        }
+
+        public void StopSound()
+        {
+            player.Stop();
+        }
+
         public void PrintAtPosition(int x, int y, char symbol, ConsoleColor color)
         {
             Console.SetCursorPosition(x, y);
@@ -205,7 +233,7 @@ namespace BrickGameEmulator
             Console.BackgroundColor = ConsoleColor.White;
         }
         
-        public void PrintAtPosition(int x, int y, string symbol, ConsoleColor color)
+        private void PrintAtPosition(int x, int y, string symbol, ConsoleColor color)
         {
             Console.SetCursorPosition(x, y);
             Console.ForegroundColor = color;

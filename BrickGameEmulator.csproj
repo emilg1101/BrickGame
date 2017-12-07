@@ -50,6 +50,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleGame.cs" />
     <Compile Include="SplashReader.cs" />
     <Compile Include="Tanki.cs" />
   </ItemGroup>

@@ -17,13 +17,19 @@ namespace BrickGameEmulator
         private int game = 0;
 
         private bool startNewGame = true;
+        private bool previewStopped = false;
 
         public BrickGame()
         {
             logger = new BGLogger(50, 0);
             surface = new BGSurface(0, 0);
             gameThread = new Thread(new ThreadStart(Update));
-            games = new Game[] {new CarRun(), new Tanki()};
+            games = new Game[]
+            {
+                new CarRun(),
+                new Tanki(),
+                new SampleGame()
+            };
         }
         
         public ConsoleKey ReadKey()
@@ -36,7 +42,7 @@ namespace BrickGameEmulator
                 return keyPressed.Key;
             }
             
-            return ConsoleKey.A;
+            return ConsoleKey.NoName;
         }
 
         public void Start()
@@ -48,24 +54,32 @@ namespace BrickGameEmulator
         {
             while (true)
             {
-                if (startNewGame)
+                if (previewStopped)
                 {
-                    games[game].Create(surface);
-                    games[game].SplashScreen();
-                    startNewGame = false;
+                    if (startNewGame)
+                    {
+                        games[game].Create(surface);
+                        games[game].SplashScreen();
+                        startNewGame = false;
+                    }
+                }
+                else
+                {
+                    surface.SetSplash("preview.sph");
                 }
                 
                 ConsoleKey key = ReadKey();
-                if (key != ConsoleKey.A) logger.Log("key", key.ToString());
+                if (key != ConsoleKey.NoName) logger.Log("key", key.ToString());
                 if (!surface.SplashIsPlaying)
                 {
                     games[game].Run(key);
                 }
                 else
                 {
-                    if (key != ConsoleKey.A)
+                    if (key != ConsoleKey.NoName)
                     {
                         logger.Log("debug", "StopSplash()");
+                        previewStopped = true;
                         surface.StopSplash();
                     }
                     
@@ -92,6 +106,7 @@ namespace BrickGameEmulator
                 if (key == ConsoleKey.PageDown) ChangeDownGame();
                 if (key == ConsoleKey.S) games[game].SplashScreen();
                 if (key == ConsoleKey.Z) break;
+                        
             }
         }
 
