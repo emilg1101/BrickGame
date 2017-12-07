@@ -164,7 +164,7 @@ public class SampleGame : Game
     
     private bool pause;
 
-    public void Run()
+    public void Run(ConsoleKey key)
     {
         if (pause) return;
         //...
