@@ -222,3 +222,16 @@ public class SampleGame : Game
     }
 }
 ```
+
+### Добавление игры в эмулятор
+
+1. Открыть BrickGame.cs 
+2. Добавить в массив экземпляр класса игры
+```C#
+games = new Game[]
+{
+    //...
+    new SampleGame(),
+    //...
+};
+```
