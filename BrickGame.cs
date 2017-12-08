@@ -14,6 +14,10 @@ namespace BrickGameEmulator
 
         private readonly Game[] games;
 
+        private Game carGame;
+        private Game tankiGame;
+        private Game sampleGame;
+        
         private int game = 0;
 
         private bool startNewGame = true;
@@ -23,12 +27,12 @@ namespace BrickGameEmulator
         {
             logger = new BGLogger(50, 0);
             surface = new BGSurface(0, 0);
-            gameThread = new Thread(new ThreadStart(Update));
-            games = new Game[]
+            gameThread = new Thread(Update);
+            games = new[]
             {
-                new CarRun(),
-                new Tanki(),
-                new SampleGame()
+                carGame,
+                tankiGame,
+                sampleGame
             };
         }
         
@@ -58,6 +62,9 @@ namespace BrickGameEmulator
                 {
                     if (startNewGame)
                     {
+                        if (game == 0) games[0] = new CarRun();
+                        if (game == 1) games[1] = new Tanki();
+                        if (game == 2) games[2] = new SampleGame();
                         games[game].Create(surface);
                         games[game].SplashScreen();
                         startNewGame = false;

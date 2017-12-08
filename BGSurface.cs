@@ -26,12 +26,6 @@ namespace BrickGameEmulator
             set => level = value;
         }
 
-        public int Speed
-        {
-            get => speed;
-            set => speed = value;
-        }
-
         private int splashPosition;
         private int splashTimeOut = 25;
 
@@ -223,6 +217,11 @@ namespace BrickGameEmulator
         public void StopSound()
         {
             player.Stop();
+        }
+
+        public void SetSpeed(int speed)
+        {
+            this.speed = (16 - speed % 15);
         }
 
         public void PrintAtPosition(int x, int y, char symbol, ConsoleColor color)
