@@ -221,7 +221,7 @@ namespace BrickGameEmulator
 
         public void SetSpeed(int speed)
         {
-            this.speed = (16 - speed % 15);
+            this.speed = 11 - speed;
         }
 
         public void PrintAtPosition(int x, int y, char symbol, ConsoleColor color)
