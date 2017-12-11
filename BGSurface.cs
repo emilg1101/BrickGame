@@ -43,6 +43,7 @@ namespace BrickGameEmulator
             this.surfacePositionY = surfacePositionY;
             
             Console.CursorVisible = false;
+            Console.Title = "BrickGame";
             
             _drawBorder(surfacePositionX, surfacePositionY);
             
@@ -119,8 +120,7 @@ namespace BrickGameEmulator
                     {
                         PrintAtPosition(surfacePositionX + 2 + (i * 2), j + 1, "▣", ConsoleColor.Black);
                         PrintAtPosition(surfacePositionX + 2 + (i * 2 + 1), j + 1, borderSymbol, ConsoleColor.White);
-                    }
-                    
+                    }   
                 }
             }
         }
