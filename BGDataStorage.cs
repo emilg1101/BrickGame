@@ -21,25 +21,27 @@ namespace BrickGameEmulator
         {
             _checkFile();
             data = new Dictionary<string, int>();
-            string[] lines = File.ReadAllLines(name + ".txt");
+            var lines = File.ReadAllLines(name);
 
-            for (int i = 0; i < lines.Length; i++)
+            foreach (var line in lines)
             {
-                string[] line = lines[i].Split();
-                data[line[0]] = int.Parse(line[1]);
+                var splitLine = line.Split();
+                data[splitLine[0]] = int.Parse(splitLine[1]);
             }
         }
 
         private void _checkFile()
         {
-            if (!File.Exists(Environment.CurrentDirectory + "/" + name + ".txt"))
-                File.Create(name + ".txt");
+            if (File.Exists(Environment.CurrentDirectory + "/" + name)) return;
+            using (var fs = File.Create(Environment.CurrentDirectory + "/" + name))
+            {
+                fs.Close();
+            }
         }
         
         public int GetInt(string key, int def)
         {
-            if (data.ContainsKey(key)) return data[key];
-            return def;
+            return data.ContainsKey(key) ? data[key] : def;
         }
 
         public void PutInt(string key, int value)
@@ -47,22 +49,18 @@ namespace BrickGameEmulator
             data[key] = value;
         }
 
+        public void Remove(string key)
+        {
+            data.Remove(key);
+        }
+
         public void Commit()
         {
-            File.Delete(name + ".txt");
-
-            List<string> lines = new List<string>();
-
-            Dictionary<string,int>.KeyCollection keys = data.Keys;
+            File.Delete(name);
 
             var keyList = data.Select(x => x.Key).ToArray();
 
-            for (int i = 0; i < keyList.Length; i++)
-            {
-                lines.Add(keyList[i] + " " + data[keyList[i]]);
-            }
-            
-            File.WriteAllLines(name + ".txt", lines.ToArray());
+            File.WriteAllLines(name, keyList.Select(key => key + " " + data[key]).ToArray());
         }
     }
 }
