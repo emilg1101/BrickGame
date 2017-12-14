@@ -6,25 +6,18 @@ namespace BrickGameEmulator
 {
     public class BGSurface : BGConstants
     {
+        private readonly BGDataStorage storage;
+        
         private readonly int surfacePositionX;
         private readonly int surfacePositionY;
 
-        private int highScore = GAME_HIGHSCORE;
-        private int score = GAME_SCORE;
-        private int level = GAME_LEVEL;
         private int speed = GAME_SPEED;
 
-        public int Score
-        {
-            get => score;
-            set => score = value;
-        }
+        public string nameOfGame;
 
-        public int Level
-        {
-            get => level;
-            set => level = value;
-        }
+        public int Score { get; set; } = GAME_SCORE;
+        public int HighScore { get; set; } = GAME_HIGHSCORE;
+        public int Level { get; set; } = GAME_LEVEL;
 
         private int splashPosition;
         private int splashTimeOut = 25;
@@ -37,8 +30,9 @@ namespace BrickGameEmulator
 
         public bool SplashIsPlaying => splashIsPlaying;        
 
-        public BGSurface(int surfacePositionX, int surfacePositionY)
+        public BGSurface(int surfacePositionX, int surfacePositionY, BGDataStorage storage)
         {
+            this.storage = storage;
             this.surfacePositionX = surfacePositionX;
             this.surfacePositionY = surfacePositionY;
             
@@ -60,6 +54,12 @@ namespace BrickGameEmulator
             _renderStatusPanel();
         }
 
+        public void InitGame(Game game)
+        {
+            nameOfGame = game.ToString();
+            HighScore = storage.GetInt(nameOfGame, 0);
+            Score = 0;
+        }
         
         public void Render(BGField bgField)
         {
@@ -85,18 +85,22 @@ namespace BrickGameEmulator
 
         private void _updateHighScore()
         {
-            if (score > highScore) highScore = score;
-            PrintMessageAtPosition(27, 2, highScore.ToString(), ConsoleColor.White);
+            if (Score > HighScore)
+            {
+                HighScore = Score;
+                storage.PutInt(nameOfGame, HighScore);
+            }
+            PrintMessageAtPosition(27, 2, HighScore.ToString(), ConsoleColor.White);
         }
 
         private void _updateScore()
         {
-            PrintMessageAtPosition(27, 5, score.ToString(), ConsoleColor.White);
+            PrintMessageAtPosition(27, 5, Score.ToString(), ConsoleColor.White);
         }
 
         private void _updateLevel()
         {
-            PrintMessageAtPosition(27, 8, level.ToString(), ConsoleColor.White);
+            PrintMessageAtPosition(27, 8, Level.ToString(), ConsoleColor.White);
         }
 
         private void _updateSpeed()
@@ -198,14 +202,7 @@ namespace BrickGameEmulator
 
         public void Pause(bool pause)
         {
-            if (pause)
-            {
-                PrintMessageAtPosition(27, 13, "PAUSE", ConsoleColor.Yellow);
-            }
-            else
-            {
-                PrintMessageAtPosition(27, 13, "     ", ConsoleColor.Yellow);
-            }
+            PrintMessageAtPosition(27, 13, pause ? "PAUSE" : "     ", ConsoleColor.Yellow);
         }
 
         public void PlaySound(string filename)

@@ -10,7 +10,7 @@ namespace BrickGameEmulator
         {
             List<BGField> frames = new List<BGField>();
             
-            string[] lines = File.ReadAllLines(filename);
+            string[] lines = File.ReadAllLines(Environment.CurrentDirectory + @"/" + filename);
 
             int framesCount = lines.Length / 20;
 

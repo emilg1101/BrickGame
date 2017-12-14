@@ -46,6 +46,11 @@ namespace BrickGameEmulator
             isPause = true;
         }
 
+        public void Destroy(BGDataStorage storage)
+        {
+            storage.Commit();
+        }
+
         public void Up()
         {
             bgField.SetValueAtPosition(x, y, 0);

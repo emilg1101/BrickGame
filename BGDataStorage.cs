@@ -7,13 +7,13 @@ namespace BrickGameEmulator
 {
     public class BGDataStorage
     {
-        private readonly string name;
+        private readonly string _path;
 
         private Dictionary<string, int> data;
         
         public BGDataStorage(string name)
         {
-            this.name = name;
+            _path = Environment.CurrentDirectory + @"\"  + name;
             _init();
         }
 
@@ -21,7 +21,7 @@ namespace BrickGameEmulator
         {
             _checkFile();
             data = new Dictionary<string, int>();
-            var lines = File.ReadAllLines(name);
+            var lines = File.ReadAllLines(_path);
 
             foreach (var line in lines)
             {
@@ -32,8 +32,8 @@ namespace BrickGameEmulator
 
         private void _checkFile()
         {
-            if (File.Exists(Environment.CurrentDirectory + "/" + name)) return;
-            using (var fs = File.Create(Environment.CurrentDirectory + "/" + name))
+            if (File.Exists(_path)) return;
+            using (var fs = File.Create(_path))
             {
                 fs.Close();
             }
@@ -56,11 +56,11 @@ namespace BrickGameEmulator
 
         public void Commit()
         {
-            File.Delete(name);
+            File.Delete(_path);
 
             var keyList = data.Select(x => x.Key).ToArray();
 
-            File.WriteAllLines(name, keyList.Select(key => key + " " + data[key]).ToArray());
+            File.WriteAllLines(_path, keyList.Select(key => key + " " + data[key]).ToArray());
         }
     }
 }

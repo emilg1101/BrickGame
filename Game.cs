@@ -13,5 +13,7 @@ namespace BrickGameEmulator
         void Start();
 
         void Pause();
+
+        void Destroy(BGDataStorage storage);
     }
 }

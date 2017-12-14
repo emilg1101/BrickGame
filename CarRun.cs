@@ -363,7 +363,12 @@ namespace BrickGameEmulator
         {
             pause = true;
         }
-        
+
+        public void Destroy(BGDataStorage storage)
+        {
+            storage.Commit();
+        }
+
         private int GetNext(int min, int max)
         { 
             return new Random().Next(min - 1, max + 1);

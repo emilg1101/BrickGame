@@ -34,5 +34,10 @@ namespace BrickGameEmulator
         {
             pause = true;
         }
+
+        public void Destroy(BGDataStorage storage)
+        {
+            storage.Commit();
+        }
     }
 }

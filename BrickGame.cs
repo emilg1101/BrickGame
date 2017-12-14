@@ -9,6 +9,7 @@ namespace BrickGameEmulator
 
         private readonly BGLogger logger;
         private readonly BGSurface surface;
+        private readonly BGDataStorage storage;
 
         private readonly Thread gameThread;
 
@@ -25,8 +26,9 @@ namespace BrickGameEmulator
 
         public BrickGame()
         {
+            storage = new BGDataStorage("game_data");
             logger = new BGLogger(50, 0);
-            surface = new BGSurface(0, 0);
+            surface = new BGSurface(0, 0, storage);
             gameThread = new Thread(Update);
             games = new[]
             {
@@ -65,8 +67,10 @@ namespace BrickGameEmulator
                         if (game == 0) games[0] = new CarRun();
                         if (game == 1) games[1] = new Tanki();
                         if (game == 2) games[2] = new SampleGame();
+                     
                         games[game].Create(surface);
                         games[game].SplashScreen();
+                        surface.InitGame(games[game]);
                         startNewGame = false;
                     }
                 }
@@ -112,13 +116,17 @@ namespace BrickGameEmulator
                 if (key == ConsoleKey.PageUp) ChangeUpGame();
                 if (key == ConsoleKey.PageDown) ChangeDownGame();
                 if (key == ConsoleKey.S) games[game].SplashScreen();
-                if (key == ConsoleKey.Z) break;
+                if (key == ConsoleKey.Z)
+                {
+                    break;
+                }
                         
             }
         }
 
         private void ChangeUpGame()
         {
+            games[game].Destroy(storage);
             game++;
             if (game == games.Length) game = 0;
             startNewGame = true;
@@ -126,6 +134,7 @@ namespace BrickGameEmulator
         
         private void ChangeDownGame()
         {
+            games[game].Destroy(storage);
             game--;
             if (game == -1) game = games.Length - 1;
             startNewGame = true;
