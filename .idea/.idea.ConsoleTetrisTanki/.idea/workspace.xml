@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f8e7bad1-3a7e-409b-a770-9a85d3723c42" name="Default" comment="Merge branch 'master' of https://github.com/emilg1101/BrickGame&#10;&#10;# Пожалуйста, введите сообщение коммита, для объяснения, зачем нужно&#10;# это слияние, особенно, если это слияние обновленной вышестоящей&#10;# ветки в тематическую ветку.&#10;#&#10;# Строки, начинающиеся с «#» будут проигнорированы, а пустое&#10;# сообщение отменяет процесс коммита.">
+    <list default="true" id="f8e7bad1-3a7e-409b-a770-9a85d3723c42" name="Default" comment="Revision branch ready">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.idea.ConsoleTetrisTanki/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/.idea.ConsoleTetrisTanki/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -283,21 +284,21 @@
       <file leaf-file-name="BGDataStorage.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BGDataStorage.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+            <state relative-caret-position="252">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
-                <marker date="1513361791590" expanded="false" signature="6:83" ph="..." />
-                <marker date="1513361791590" expanded="true" signature="112:1526" ph="{...}" />
-                <marker date="1513361791590" expanded="true" signature="145:1524" ph="{...}" />
-                <marker date="1513361791590" expanded="true" signature="288:394" ph="{...}" />
-                <marker date="1513361791590" expanded="true" signature="424:747" ph="{...}" />
-                <marker date="1513361791590" expanded="true" signature="601:737" ph="{...}" />
-                <marker date="1513361791590" expanded="true" signature="782:950" ph="{...}" />
-                <marker date="1513361791590" expanded="true" signature="884:940" ph="{...}" />
-                <marker date="1513361791590" expanded="true" signature="1006:1086" ph="{...}" />
-                <marker date="1513361791590" expanded="true" signature="1137:1188" ph="{...}" />
-                <marker date="1513361791590" expanded="true" signature="1228:1278" ph="{...}" />
-                <marker date="1513361791590" expanded="true" signature="1308:1518" ph="{...}" />
+                <marker date="1513362957005" expanded="false" signature="6:83" ph="..." />
+                <marker date="1513362957005" expanded="true" signature="112:1526" ph="{...}" />
+                <marker date="1513362957005" expanded="true" signature="145:1524" ph="{...}" />
+                <marker date="1513362957005" expanded="true" signature="288:394" ph="{...}" />
+                <marker date="1513362957005" expanded="true" signature="424:747" ph="{...}" />
+                <marker date="1513362957005" expanded="true" signature="601:737" ph="{...}" />
+                <marker date="1513362957005" expanded="true" signature="782:950" ph="{...}" />
+                <marker date="1513362957005" expanded="true" signature="884:940" ph="{...}" />
+                <marker date="1513362957005" expanded="true" signature="1006:1086" ph="{...}" />
+                <marker date="1513362957005" expanded="true" signature="1137:1188" ph="{...}" />
+                <marker date="1513362957005" expanded="true" signature="1228:1278" ph="{...}" />
+                <marker date="1513362957005" expanded="true" signature="1308:1518" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -631,11 +632,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513361869668</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Revision branch ready">
+      <created>1513363260918</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1513363260918</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82622000" />
+    <option name="totallyTimeSpent" value="83385000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -648,10 +656,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="50" y="-4" width="1317" height="773" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SFDX" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6038864" sideWeight="0.5026616" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32735425" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -668,12 +678,30 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39910313" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="SFDX" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6038864" sideWeight="0.5026616" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884902" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39910313" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26158446" sideWeight="0.4973384" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32735425" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24942966" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Log Manager" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -703,7 +731,8 @@
     <MESSAGE value="Update: &#10;Add void Destroy() in Game interface&#10;Add void InitGame(Game) in BGSurface.cs" />
     <MESSAGE value="Merge branch 'master' of https://github.com/emilg1101/BrickGame&#10;&#10;# Пожалуйста, введите сообщение коммита, для объяснения, зачем нужно&#10;# это слияние, особенно, если это слияние обновленной вышестоящей&#10;# ветки в тематическую ветку.&#10;#&#10;# Строки, начинающиеся с «#» будут проигнорированы, а пустое&#10;# сообщение отменяет процесс коммита." />
     <MESSAGE value="Test commit to revision branch" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test commit to revision branch" />
+    <MESSAGE value="Revision branch ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revision branch ready" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1880,21 +1909,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BGDataStorage.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        <state relative-caret-position="252">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <marker date="1513361791590" expanded="false" signature="6:83" ph="..." />
-            <marker date="1513361791590" expanded="true" signature="112:1526" ph="{...}" />
-            <marker date="1513361791590" expanded="true" signature="145:1524" ph="{...}" />
-            <marker date="1513361791590" expanded="true" signature="288:394" ph="{...}" />
-            <marker date="1513361791590" expanded="true" signature="424:747" ph="{...}" />
-            <marker date="1513361791590" expanded="true" signature="601:737" ph="{...}" />
-            <marker date="1513361791590" expanded="true" signature="782:950" ph="{...}" />
-            <marker date="1513361791590" expanded="true" signature="884:940" ph="{...}" />
-            <marker date="1513361791590" expanded="true" signature="1006:1086" ph="{...}" />
-            <marker date="1513361791590" expanded="true" signature="1137:1188" ph="{...}" />
-            <marker date="1513361791590" expanded="true" signature="1228:1278" ph="{...}" />
-            <marker date="1513361791590" expanded="true" signature="1308:1518" ph="{...}" />
+            <marker date="1513362957005" expanded="false" signature="6:83" ph="..." />
+            <marker date="1513362957005" expanded="true" signature="112:1526" ph="{...}" />
+            <marker date="1513362957005" expanded="true" signature="145:1524" ph="{...}" />
+            <marker date="1513362957005" expanded="true" signature="288:394" ph="{...}" />
+            <marker date="1513362957005" expanded="true" signature="424:747" ph="{...}" />
+            <marker date="1513362957005" expanded="true" signature="601:737" ph="{...}" />
+            <marker date="1513362957005" expanded="true" signature="782:950" ph="{...}" />
+            <marker date="1513362957005" expanded="true" signature="884:940" ph="{...}" />
+            <marker date="1513362957005" expanded="true" signature="1006:1086" ph="{...}" />
+            <marker date="1513362957005" expanded="true" signature="1137:1188" ph="{...}" />
+            <marker date="1513362957005" expanded="true" signature="1228:1278" ph="{...}" />
+            <marker date="1513362957005" expanded="true" signature="1308:1518" ph="{...}" />
           </folding>
         </state>
       </provider>
