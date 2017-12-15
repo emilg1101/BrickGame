@@ -15,7 +15,6 @@ namespace BrickGameEmulator
         {
             _path = Environment.CurrentDirectory + @"\"  + name;
             _init();
-            //smth
         }
 
         private void _init()
