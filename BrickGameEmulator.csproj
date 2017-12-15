@@ -44,11 +44,12 @@
     <Compile Include="BGConstants.cs" />
     <Compile Include="BGDataStorage.cs" />
     <Compile Include="BGField.cs" />
+      <Compile Include="Game.cs"/>
     <Compile Include="BGLogger.cs" />
     <Compile Include="BGSurface.cs" />
     <Compile Include="BrickGame.cs" />
-    <Compile Include="CarRun.cs" />
-    <Compile Include="Game.cs" />
+      <Compile Include="CarRunGame.cs"/>
+      <Compile Include="IGame.cs"/>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleGame.cs" />

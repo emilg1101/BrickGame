@@ -17,7 +17,6 @@ namespace BrickGameEmulator
 
         private Game carGame;
         private Game tankiGame;
-        private Game sampleGame;
         
         private int game = 0;
 
@@ -33,8 +32,7 @@ namespace BrickGameEmulator
             games = new[]
             {
                 carGame,
-                tankiGame,
-                sampleGame
+                tankiGame
             };
         }
         
@@ -64,12 +62,12 @@ namespace BrickGameEmulator
                 {
                     if (startNewGame)
                     {
-                        if (game == 0) games[0] = new CarRun();
-                        if (game == 1) games[1] = new Tanki();
-                        if (game == 2) games[2] = new SampleGame();
+                        if (game == 0) games[game] = new CarRunGame();
+                        if (game == 1) games[game] = new Tanki();
                      
-                        games[game].Create(surface);
-                        games[game].SplashScreen();
+                        games[game].SetSurface(surface);
+                        games[game].Create();
+                        surface.SetSplash(games[game].SplashScreen());
                         surface.InitGame(games[game]);
                         startNewGame = false;
                     }
@@ -81,9 +79,9 @@ namespace BrickGameEmulator
                 
                 ConsoleKey key = ReadKey();
                 if (key != ConsoleKey.NoName) logger.Log("key", key.ToString());
-                if (!surface.SplashIsPlaying)
+                if (!surface.SplashIsPlaying && !games[game].IsPause())
                 {
-                    games[game].Run(key);
+                    surface.Render(games[game].Run(key));
                 }
                 else
                 {
@@ -102,22 +100,20 @@ namespace BrickGameEmulator
                     if (isPause)
                     {
                         isPause = false;
-                        surface.Pause(isPause);
                         games[game].Start();
                     }
                     else
                     {
                         isPause = true;
-                        surface.Pause(isPause);
                         games[game].Pause();
                     }
                     
                 }
                 if (key == ConsoleKey.PageUp) ChangeUpGame();
                 if (key == ConsoleKey.PageDown) ChangeDownGame();
-                if (key == ConsoleKey.S) games[game].SplashScreen();
                 if (key == ConsoleKey.Z)
                 {
+                    games[game].Destroy(storage);
                     break;
                 }
                         

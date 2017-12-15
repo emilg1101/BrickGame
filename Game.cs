@@ -2,18 +2,67 @@
 
 namespace BrickGameEmulator
 {
-    public interface Game
+    public class Game : IGame
     {
-        void Create(BGSurface surface);   
-        
-        void Run(ConsoleKey key);
-        
-        void SplashScreen();
-        
-        void Start();
+        private BGSurface _surface;
 
-        void Pause();
+        private bool _pause;
 
-        void Destroy(BGDataStorage storage);
+        public void SetSurface(BGSurface surface)
+        {
+            _surface = surface;
+        }
+
+        public void SetScore(int score)
+        {
+            _surface.Score = score;
+        }
+
+        public void SetLevel(int level)
+        {
+            _surface.Level = level;
+        }
+
+        public void SetSpeed(int speed)
+        {
+            _surface.Speed = 11 - speed;
+        }
+
+        public bool IsPause()
+        {
+            return _pause;
+        }
+
+        public virtual void Create()
+        {
+            
+        }
+
+        public virtual BGField Run(ConsoleKey key)
+        {
+            return new BGField();
+        }
+
+        public virtual string SplashScreen()
+        {
+            return "";
+        }
+
+        public virtual void Start()
+        {
+            _pause = false;
+            _surface.Pause(_pause);
+        }
+
+        public virtual void Pause()
+        {
+            _pause = true;
+            _surface.Pause(_pause);
+        }
+
+        public virtual void Destroy(BGDataStorage storage)
+        {
+            storage.Commit();
+        }
     }
 }
