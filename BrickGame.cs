@@ -17,6 +17,7 @@ namespace BrickGameEmulator
 
         private Game carGame;
         private Game tankiGame;
+        private Game sampleGame;
         
         private int game = 0;
 
@@ -32,7 +33,8 @@ namespace BrickGameEmulator
             games = new[]
             {
                 carGame,
-                tankiGame
+                tankiGame,
+                sampleGame
             };
         }
         
@@ -64,6 +66,7 @@ namespace BrickGameEmulator
                     {
                         if (game == 0) games[game] = new CarRunGame();
                         if (game == 1) games[game] = new Tanki();
+                        if (game == 2) games[game] = new SampleGame();
                      
                         games[game].SetSurface(surface);
                         games[game].Create();

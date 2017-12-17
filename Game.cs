@@ -35,7 +35,7 @@ namespace BrickGameEmulator
 
         public virtual void Create()
         {
-            
+            Start();
         }
 
         public virtual BGField Run(ConsoleKey key)
