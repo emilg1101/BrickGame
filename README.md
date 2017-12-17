@@ -19,8 +19,8 @@ BrickGameEmulator
 
 Сеттеры/Геттеры:
 1.    **int Score** - Текущее кол-во очков игрока.
-2.    **int Level** - Текущий уровень. (Не работает пока)
-3.    **int Speed** - Текущая скорость игры. (Не работает пока)
+2.    **int Level** - Текущий уровень.
+3.    **int Speed** - Текущая скорость игры.
 
 Доступные методы:
 1.    **void PrintAtPosition(int x, int y, char symbol, ConsoleColor color)** -
