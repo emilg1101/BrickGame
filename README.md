@@ -265,13 +265,11 @@ public class SampleGame : Game
 
 ### Добавление игры в эмулятор
 
-1. Открыть BrickGame.cs 
-2. Добавить в массив экземпляр класса игры
+1. Открыть BGGames.cs 
+2. Добавить в массив игру
 ```C#
-games = new Game[]
+private readonly Game[] _games =
 {
-    //...
-    new SampleGame(),
-    //...
+    new SampleGame()
 };
 ```

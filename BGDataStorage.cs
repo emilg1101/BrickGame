@@ -9,7 +9,7 @@ namespace BrickGameEmulator
     {
         private readonly string _path;
 
-        private Dictionary<string, int> data;
+        private Dictionary<string, int> _data;
         
         public BGDataStorage(string name)
         {
@@ -20,13 +20,13 @@ namespace BrickGameEmulator
         private void _init()
         {
             _checkFile();
-            data = new Dictionary<string, int>();
+            _data = new Dictionary<string, int>();
             var lines = File.ReadAllLines(_path);
 
             foreach (var line in lines)
             {
                 var splitLine = line.Split();
-                data[splitLine[0]] = int.Parse(splitLine[1]);
+                _data[splitLine[0]] = int.Parse(splitLine[1]);
             }
         }
 
@@ -41,26 +41,26 @@ namespace BrickGameEmulator
         
         public int GetInt(string key, int def)
         {
-            return data.ContainsKey(key) ? data[key] : def;
+            return _data.ContainsKey(key) ? _data[key] : def;
         }
 
         public void PutInt(string key, int value)
         {
-            data[key] = value;
+            _data[key] = value;
         }
 
         public void Remove(string key)
         {
-            data.Remove(key);
+            _data.Remove(key);
         }
 
         public void Commit()
         {
             File.Delete(_path);
 
-            var keyList = data.Select(x => x.Key).ToArray();
+            var keyList = _data.Select(x => x.Key).ToArray();
 
-            File.WriteAllLines(_path, keyList.Select(key => key + " " + data[key]).ToArray());
+            File.WriteAllLines(_path, keyList.Select(key => key + " " + _data[key]).ToArray());
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Threading;
 
 namespace BrickGameEmulator
 {
@@ -358,7 +356,7 @@ namespace BrickGameEmulator
             base.Destroy(storage);
         }
 
-        private int GetNext(int min, int max)
+        private static int GetNext(int min, int max)
         { 
             return new Random().Next(min - 1, max + 1);
         }
