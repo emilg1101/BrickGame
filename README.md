@@ -10,8 +10,27 @@ BrickGameEmulator
 2. ---
 3. ---
 
-Документация (Кратко)
+Документация
 ---------------------
+
+=======
+### Class BGSurface
+
+Класс для взаимодействия с консолью.
+
+Сеттеры/Геттеры:
+1.    **int Score** - Текущее кол-во очков игрока.
+2.    **int Level** - Текущий уровень.
+3.    **int Speed** - Текущая скорость игры.
+
+Доступные методы:
+1.    **void PrintAtPosition(int x, int y, char symbol, ConsoleColor color)** -
+Рисует в консоли символ по заданным координатам и заданному цвету.
+2.    **void PrintMessageAtPosition(int x, int y, string text, ConsoleColor color)** - Печатает в консоли текст по заданным координатам и заданному цвету.
+3.    **void Render(BGField bgField)** - Отрисовка игрового поля.
+4.    **void SetSplash(string filename)** - Устанавливает превью-анимацию для игры.
+5.    **void SetSplash(string filename, int timeout)** - Устанавливает превью-анимацию для игры с покадровой задержкой.
+
 
 ### Class BGField
 
