@@ -5,50 +5,37 @@ namespace BrickGameEmulator
     public class Tanki : Game
     {
         private BGField bgField;
-        private BGSurface surface;
 
         private bool isPause = false;
 
         private int x = 5;
         private int y = 5;
+        private int score = 0;
 
-        public void Create(BGSurface surface)
+        public override void Create()
         {
-            this.surface = surface;
             bgField = new BGField(); 
             bgField.SetValueAtPosition(x, y, 1);
         }
 
-        public void Run(ConsoleKey key)
+        public override BGField Run(ConsoleKey key)
         {
-            if (isPause) return;
             if (key == ConsoleKey.UpArrow) Up();
             if (key == ConsoleKey.DownArrow) Down();
             if (key == ConsoleKey.RightArrow) Right();
             if (key == ConsoleKey.LeftArrow) Left();
-            if (key == ConsoleKey.Enter) surface.Score++;
-            if (key == ConsoleKey.B) surface.Score = 0;
-            surface.Render(bgField);
+            if (key == ConsoleKey.Enter) SetScore(score++);
+            if (key == ConsoleKey.B)
+            {
+                score = 0;
+                SetScore(score);
+            }
+            return bgField;
         }
         
-        public void SplashScreen()
+        public override string SplashScreen()
         {
-            surface.SetSplash("tanki.sph");
-        }
-        
-        public void Start()
-        {
-            isPause = false;
-        }
-
-        public void Pause()
-        {
-            isPause = true;
-        }
-
-        public void Destroy(BGDataStorage storage)
-        {
-            storage.Commit();
+            return "tanki.sph";
         }
 
         public void Up()

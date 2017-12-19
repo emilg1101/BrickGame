@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Threading;
 
 namespace BrickGameEmulator
 {
-    public class CarRun : Game
+    public class CarRunGame : Game
     {
-        private BGSurface surface;
-
         private BGField field;
 
         private bool pause;
@@ -22,6 +18,7 @@ namespace BrickGameEmulator
         private int count;
         private int time;
         private int speed;
+        private int score;
         private int carsOut;
 
         private List<int[]> cars;
@@ -35,19 +32,19 @@ namespace BrickGameEmulator
             new[] {0, 1, 0, 1}
         };
 
-        public void Create(BGSurface surface)
+        public override void Create()
         {
-            this.surface = surface;
             field = new BGField();
             cars = new List<int[]>();
 
             x = 2;
             speed = 10;
+            score = 0;
             carsOut = 0;
             playerPosition = 1;
             
-            surface.SetSpeed(speed);
-            surface.Score = 0;
+            SetScore(score);
+            SetSpeed(speed);
             
             PrepareBorder(ref leftBorder);
             PrepareBorder(ref rightBorder);
@@ -55,7 +52,7 @@ namespace BrickGameEmulator
             ClearCar(x == 2 ? 5 : 2, y);
         }
 
-        public void Run(ConsoleKey key)
+        public override BGField Run(ConsoleKey key)
         {
             if (isGameOver)
             {
@@ -65,19 +62,18 @@ namespace BrickGameEmulator
                     key == ConsoleKey.DownArrow ||
                     key == ConsoleKey.Spacebar)
                 {
-                    Create(surface);
+                    Create();
                     isGameOver = false;
-                    return;
+                    return field;
                 }
                 else
                 {
                     DrawCar(playerPosition == 1 ? 2 : 5, y);
-                    surface.Render(field);
-                    return;
+                    return field;
                 }
             }
             
-            if (pause || isGameOver) return;
+            if (pause || isGameOver) return field;
             
             if (key == ConsoleKey.RightArrow)
             {
@@ -94,8 +90,9 @@ namespace BrickGameEmulator
             
             if (time % speed == 0) Draw();
             
-            surface.Render(field);
             time++;
+
+            return field;
         }
 
         public void Draw()
@@ -121,9 +118,6 @@ namespace BrickGameEmulator
                     if (carY != 13) playerPosition = playerPosition == 1 ? 2 : 1;
                     
                     isGameOver = true;
-                    //playerPosition = playerPosition == 1 ? 2 : 1;
-                    //ClearCar(carX == 1 ? 2 : 5, carY - 1);
-                    //DrawCar(carX == 1 ? 2 : 5, carY);
                     return;
                 }
                 
@@ -136,12 +130,14 @@ namespace BrickGameEmulator
 
         public void AddScore()
         {
-            surface.Score += 10;
-            if (surface.Score % 100 == 0 && speed > 1)
+            score += 10;
+            if (score % 100 == 0 && speed > 1)
             {
                 speed--;
-                surface.SetSpeed(speed);
+                SetSpeed(speed);
             }
+            
+            SetScore(score);
         }
 
         public void Right()
@@ -349,27 +345,18 @@ namespace BrickGameEmulator
             }
         }
 
-        public void SplashScreen()
+        public override string SplashScreen()
         {
-            surface.SetSplash("carsrun.sph");
+            return "carsrun.sph";
+        }
+        
+        public override void Destroy(BGDataStorage storage)
+        {
+            storage.PutInt("test", 34567);
+            base.Destroy(storage);
         }
 
-        public void Start()
-        {
-            pause = false;
-        }
-
-        public void Pause()
-        {
-            pause = true;
-        }
-
-        public void Destroy(BGDataStorage storage)
-        {
-            storage.Commit();
-        }
-
-        private int GetNext(int min, int max)
+        private static int GetNext(int min, int max)
         { 
             return new Random().Next(min - 1, max + 1);
         }

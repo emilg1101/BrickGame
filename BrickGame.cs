@@ -5,37 +5,30 @@ namespace BrickGameEmulator
 {
     public class BrickGame
     {
-        private bool isPause;
+        private bool _isPause;
 
-        private readonly BGLogger logger;
-        private readonly BGSurface surface;
-        private readonly BGDataStorage storage;
+        private readonly BGLogger _logger;
+        private readonly BGDataStorage _storage;
+        private readonly BGSurface _surface;
+        private readonly BGGames _games;
 
-        private readonly Thread gameThread;
+        private readonly Thread _gameThread;
 
-        private readonly Game[] games;
-
-        private Game carGame;
-        private Game tankiGame;
-        private Game sampleGame;
+        private Game _currentGame;
         
-        private int game = 0;
+        private int _game;
 
-        private bool startNewGame = true;
-        private bool previewStopped = false;
+        private bool _startNewGame = true;
+        private bool _previewStopped;
 
         public BrickGame()
         {
-            storage = new BGDataStorage("game_data");
-            logger = new BGLogger(50, 0);
-            surface = new BGSurface(0, 0, storage);
-            gameThread = new Thread(Update);
-            games = new[]
-            {
-                carGame,
-                tankiGame,
-                sampleGame
-            };
+            _logger = new BGLogger(50, 0);
+            _storage = new BGDataStorage("game_data");
+            _surface = new BGSurface(0, 0, _storage);
+            _games = new BGGames();
+          
+            _gameThread = new Thread(Update);
         }
         
         public ConsoleKey ReadKey()
@@ -53,71 +46,62 @@ namespace BrickGameEmulator
 
         public void Start()
         {
-            gameThread.Start();
+            _gameThread.Start();
         }
 
         public void Update()
         {
             while (true)
             {
-                if (previewStopped)
+                if (_previewStopped)
                 {
-                    if (startNewGame)
+                    if (_startNewGame)
                     {
-                        if (game == 0) games[0] = new CarRun();
-                        if (game == 1) games[1] = new Tanki();
-                        if (game == 2) games[2] = new SampleGame();
+                        _currentGame = _games.GetGame(_game);
                      
-                        games[game].Create(surface);
-                        games[game].SplashScreen();
-                        surface.InitGame(games[game]);
-                        startNewGame = false;
+                        _currentGame.SetSurface(_surface);
+                        _currentGame.Create();
+                        _surface.SetSplash(_currentGame.SplashScreen());
+                        _surface.InitGame(_currentGame);
+                        _startNewGame = false;
                     }
                 }
                 else
                 {
-                    surface.SetSplash("preview.sph");
+                    _surface.SetSplash("preview.sph");
                 }
                 
                 ConsoleKey key = ReadKey();
-                if (key != ConsoleKey.NoName) logger.Log("key", key.ToString());
-                if (!surface.SplashIsPlaying)
+                
+                if (key != ConsoleKey.NoName) _logger.Log("key", key.ToString());
+                
+                if (!_surface.SplashIsPlaying && !_currentGame.IsPause())
                 {
-                    games[game].Run(key);
+                    _surface.Render(_currentGame.Run(key));
                 }
                 else
                 {
                     if (key != ConsoleKey.NoName)
                     {
-                        logger.Log("debug", "StopSplash()");
-                        previewStopped = true;
-                        surface.StopSplash();
+                        _logger.Log("debug", "StopSplash()");
+                        _previewStopped = true;
+                        _surface.StopSplash();
                     }
                     
-                    surface.Render(null);
+                    _surface.Render(null);
                 }
 
                 if (key == ConsoleKey.P)
                 {
-                    if (isPause)
-                    {
-                        isPause = false;
-                        surface.Pause(isPause);
-                        games[game].Start();
-                    }
-                    else
-                    {
-                        isPause = true;
-                        surface.Pause(isPause);
-                        games[game].Pause();
-                    }
-                    
+                    if (_currentGame.IsPause()) _currentGame.Start();
+                    else _currentGame.Pause();
                 }
+                
                 if (key == ConsoleKey.PageUp) ChangeUpGame();
                 if (key == ConsoleKey.PageDown) ChangeDownGame();
-                if (key == ConsoleKey.S) games[game].SplashScreen();
                 if (key == ConsoleKey.Z)
                 {
+                    _currentGame.Destroy(_storage);
                     break;
                 }
                         
@@ -126,18 +110,18 @@ namespace BrickGameEmulator
 
         private void ChangeUpGame()
         {
-            games[game].Destroy(storage);
-            game++;
-            if (game == games.Length) game = 0;
-            startNewGame = true;
+            _currentGame.Destroy(_storage);
+            _game++;
+            if (_game == _games.GetCount()) _game = 0;
+            _startNewGame = true;
         }
         
         private void ChangeDownGame()
         {
-            games[game].Destroy(storage);
-            game--;
-            if (game == -1) game = games.Length - 1;
-            startNewGame = true;
+            _currentGame.Destroy(_storage);
+            _game--;
+            if (_game == -1) _game = _games.GetCount() - 1;
+            _startNewGame = true;
         }
     }
 }

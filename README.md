@@ -10,9 +10,10 @@ BrickGameEmulator
 2. ---
 3. ---
 
-Документация (Кратко)
+Документация
 ---------------------
 
+=======
 ### Class BGSurface
 
 Класс для взаимодействия с консолью.
@@ -30,6 +31,7 @@ BrickGameEmulator
 4.    **void SetSplash(string filename)** - Устанавливает превью-анимацию для игры.
 5.    **void SetSplash(string filename, int timeout)** - Устанавливает превью-анимацию для игры с покадровой задержкой.
 
+
 ### Class BGField
 
 Класс для работы с игровым полем. Представоляет собой двумерный массив 10 на 20.
@@ -44,18 +46,23 @@ BrickGameEmulator
 3.    **int GetValueByPosition(int x, int y)** - Возвращает значение ячейки поля в указанных координатах.
 4.    **void SetValueAtPosition(int x, int y, int value)** - Устанавливает указанное значение в ячейку поля в указанных координатах.
 
-### Interface Game
+### Class Game
 
 Методы:
-1.    **void Create(BGSurface)** - Вызывается при запуске игры.
-2.    **void Run(ConsoleKey)** - Вызывается при каждом игровом такте.
-3.    **void SplashScreen()** - Вызывается для установки превью-анимации игры.
+1.    **void Create()** - Вызывается кода игра была впервые создана. Здесь вы должны выполнить всю статическую настройку: инициализация игрового поля.
+2.    **BGField Run(ConsoleKey key)** - Вызывается при каждом игровом такте.
+3.    **string SplashScreen()** - Вызывается для установки превью-анимации игры.
 4.    **void Start()** - Срабатывает при выходе из состояния PAUSE
 5.    **void Pause()** - Срабатывает при входе в состояние PAUSE
+6.    **void Destroy(BGDataStorage storage)** - Вызывается при смене игры.
+7.    **void SetScore(int score)** - Устанавливает количество очков.
+8.    **void SetSpeed(int speed)** - Устанавливает скорость игры. Значение от 1 до 15.
+9.    **void SetLevel(int level)** - Устанавливает уровень игры.
+10.    **bool IsPause()** - Возвращает состояние игры.   
 
 ### Пример SampleGame
 
-1. Реализуйте интерфейс **Game** в вашем классе.
+1. Наследуйте класс **Game** в вашей игре.
 
 ```C#
 public class SampleGame : Game
@@ -64,49 +71,53 @@ public class SampleGame : Game
 }
 ```
 
-2. Реализуйте методы **Сreate(BGSurface)**, **Run(ConsoleKey)**, **SplashScreen()**, **Start()**, **Pause()**.
+2. Перепешите методы **void Сreate()**, **BGField Run(ConsoleKey)**, **string SplashScreen()**, **void Start()**, **void Pause()**, **void Destroy(BGDataStorage)**.
 
 ```C#
 public class SampleGame : Game
 {
-    public void Create(BGSurface surface)
+    public override void Create()
     {
-        throw new NotImplementedException();
+        base.Create();
     }
 
-    public void Run(ConsoleKey key)
+    public override BGField Run(ConsoleKey key)
     {
-        throw new NotImplementedException();
+        return base.Run(key);
     }
 
-    public void SplashScreen()
+    public override string SplashScreen()
     {
-        throw new NotImplementedException();
+        return base.SplashScreen();
     }
 
-    public void Start()
+    public override void Start()
     {
-        throw new NotImplementedException();
+        base.Start();
     }
 
-    public void Pause()
+    public override void Pause()
     {
-        throw new NotImplementedException();
+        base.Pause();
+    }
+
+    public override void Destroy(BGDataStorage storage)
+    {
+        base.Destroy(storage);
     }
 }
 ```
 
-3. Сохраним экземпляр класса **BGSurface**
+3. Теперь надо создать игровое поле (BGField) в методе **Create()**
 
 ```C#
 public class SampleGame : Game
 {
-    
-    private BGSurface surface;
+    private BGField field;
 
-    public void Create(BGSurface surface)
+    public override void Create()
     {
-        this.surface = surface;
+        field = new BGField();
     }
     
     //...
@@ -119,14 +130,13 @@ public class SampleGame : Game
 ```C#
 public class SampleGame : Game
 {
-
-    private BGSurface surface;
+    private BGField field;
     
     //...
 
-    public void Run(ConsoleKey key)
+    public override BGField Run(ConsoleKey key)
     {
-        surface.Render(new BGField());
+        return field;
     }
     
     //...
@@ -143,9 +153,9 @@ public class SampleGame : Game
    
     //...
 
-    public void SplashScreen()
+    public override string SplashScreen()
     {
-        surface.SetSplash("sample_game.sph"); //Файл с анимацией
+        return "sample_game.sph"; //Файл с анимацией
     }
     
     //...
@@ -153,7 +163,7 @@ public class SampleGame : Game
  }
  ```
  
- 6. Добавляем состояние игры.
+ 6. Добавляем обработку нажатия клавиши.
  
   
 ```C#
@@ -162,62 +172,111 @@ public class SampleGame : Game
    
     //...
     
-    private bool pause;
-
-    public void Run(ConsoleKey key)
-    {
-        if (pause) return;
-        //...
+    public override BGField Run(ConsoleKey key)
+    {   
+        if (key == ConsoleKey.UpArrow) Up();
+        if (key == ConsoleKey.DownArrow) Down();
+        if (key == ConsoleKey.RightArrow) Right();
+        if (key == ConsoleKey.LeftArrow) Left();
+        return field;
     }
+    
+    public void Up(){}
+    
+    public void Down(){}
+    
+    public void Right(){}
+    
+    public void Left(){}
     
     //...
+}
+```
+
+ 7. Добавляем передвижения.
+ 
+ ```C#
+ public class SampleGame : Game
+ {
+    //Первоначальная позиция точки
+    private int x = 0;
+    private int y = 0;
     
-    public void Start()
-    {
-        pause = false;
-    }
-    
-    public void Pause()
-    {
-        pause = true;
-    }
+     //...
+     
+     private void Up()
+     {
+        field.SetValueAtPosition(x, y, 0); //Закрашиваем точку в текущей позиции 
+        if (y != 0) y--; //Меняем позицию
+        field.SetValueAtPosition(x, y, 1); //Рисуем точку в новой позиции
+     }
+     
+     private void Down(){}
+     
+     private void Right(){}
+     
+     private void Left(){}
+     
+     //...
  }
  ```
+
  Полный код
  ```C#
  namespace BrickGameEmulator
 {
     public class SampleGame : Game
     {
-        private BGSurface surface;
+        private BGField field;
 
-        private bool pause;
+        private int x = 0;
+        private int y = 0;
         
-        public void Create(BGSurface surface)
+        public override void Create()
         {
-            this.surface = surface;
+            field = new BGField();
         }
 
-        public void Run(ConsoleKey key)
+        public override BGField Run(ConsoleKey key)
         {
-            if (pause) return;
-            
-            surface.Render(new BGField());
+            if (key == ConsoleKey.UpArrow) Up();
+            if (key == ConsoleKey.DownArrow) Down();
+            if (key == ConsoleKey.RightArrow) Right();
+            if (key == ConsoleKey.LeftArrow) Left();
+            return field;
+        }
+        
+        private void Up()
+        {
+            field.SetValueAtPosition(x, y, 0);
+            if (y != 0) y--;
+            field.SetValueAtPosition(x, y, 1);
         }
 
-        public void SplashScreen()
+        private void Down()
         {
-            surface.SetSplash("sample_game.sph");
+            field.SetValueAtPosition(x, y, 0);
+            if (y != field.GetHeight() - 1) y++;
+            field.SetValueAtPosition(x, y, 1);
+        }
+        
+        private void Right()
+        {
+            field.SetValueAtPosition(x, y, 0);
+            if (x != field.GetWidth() - 1) x++;
+            field.SetValueAtPosition(x, y, 1);
+        }
+        
+        private void Left()
+        {
+            field.SetValueAtPosition(x, y, 0);
+            if (x != 0) x--;
+            field.SetValueAtPosition(x, y, 1);
         }
 
-        public void Start()
+        public override string SplashScreen()
         {
-            pause = false;
-        }
-
-        public void Pause()
-        {
-            pause = true;
+            return "sample_game.sph";
         }
     }
 }
@@ -225,13 +284,11 @@ public class SampleGame : Game
 
 ### Добавление игры в эмулятор
 
-1. Открыть BrickGame.cs 
-2. Добавить в массив экземпляр класса игры
+1. Открыть BGGames.cs 
+2. Добавить в массив игру
 ```C#
-games = new Game[]
+private readonly Game[] _games =
 {
-    //...
-    new SampleGame(),
-    //...
+    new SampleGame()
 };
 ```

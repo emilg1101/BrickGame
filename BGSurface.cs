@@ -11,13 +11,12 @@ namespace BrickGameEmulator
         private readonly int surfacePositionX;
         private readonly int surfacePositionY;
 
-        private int speed = GAME_SPEED;
-
         public string nameOfGame;
 
         public int Score { get; set; } = GAME_SCORE;
         public int HighScore { get; set; } = GAME_HIGHSCORE;
         public int Level { get; set; } = GAME_LEVEL;
+        public int Speed { get; set; } = GAME_SPEED;
 
         private int splashPosition;
         private int splashTimeOut = 25;
@@ -26,7 +25,7 @@ namespace BrickGameEmulator
 
         private SoundPlayer player;
 
-        private bool splashIsPlaying = true;
+        private bool splashIsPlaying = false;
 
         public bool SplashIsPlaying => splashIsPlaying;        
 
@@ -71,11 +70,12 @@ namespace BrickGameEmulator
             else
             {
                 _render(bgField);
+                _renderStatusPanel();
+                
             }
-            _renderStatusPanel();
         }
 
-        private void _renderStatusPanel()
+        public void _renderStatusPanel()
         {
             _updateHighScore();
             _updateScore();
@@ -105,7 +105,7 @@ namespace BrickGameEmulator
 
         private void _updateSpeed()
         {
-            PrintMessageAtPosition(27, 11, speed.ToString(), ConsoleColor.White);
+            PrintMessageAtPosition(27, 11, Speed.ToString(), ConsoleColor.White);
         }
         
         private void _render(BGField bgField)
@@ -214,11 +214,6 @@ namespace BrickGameEmulator
         public void StopSound()
         {
             player.Stop();
-        }
-
-        public void SetSpeed(int speed)
-        {
-            this.speed = 11 - speed;
         }
 
         public void PrintAtPosition(int x, int y, char symbol, ConsoleColor color)

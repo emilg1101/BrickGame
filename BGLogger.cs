@@ -4,32 +4,32 @@ namespace BrickGameEmulator
 {
     public class BGLogger
     {
-        private int x;
-        private int y;
+        private readonly int _x;
 
-        private int startY;
-        private int line = 1;
+        private readonly int _startY;
+        private int _currentY;
+        private int _line = 1;
 
-        private int buffer = 24;
+        private const int Buffer = 24;
 
         public BGLogger(int x, int y)
         {
-            this.x = x;
-            this.y = y;
-            startY = y;
+            _x = x;
+            _startY = y;
+            _currentY = y;
         }
 
-        public void Log(String level, String message)
+        public void Log(string level, string message)
         {
-            if (startY + buffer == y + 1) y = startY;
-            Console.SetCursorPosition(x, y);
+            if (_startY + Buffer == _currentY + 1) _currentY = _startY;
+            Console.SetCursorPosition(_x, _currentY);
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("                            ");
-            Console.SetCursorPosition(x, y);
-            Console.WriteLine(line+":"+level + ": " + message);
+            Console.SetCursorPosition(_x, _currentY);
+            Console.WriteLine(_line+":"+level + ": " + message);
             Console.ResetColor();
-            y++;
-            line++;
+            _currentY++;
+            _line++;
         }
     }
 }

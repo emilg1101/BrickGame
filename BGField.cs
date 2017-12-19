@@ -2,43 +2,43 @@
 {
     public class BGField
     {
-        private int[][] gameField;
+        private readonly int[][] _gameField;
 
-        private int fieldWidth = BGConstants.FIELD_WIDTH;
-        private int fieldHeight = BGConstants.FIELD_HEIGHT;
+        private readonly int _fieldWidth = BGConstants.FIELD_WIDTH;
+        private readonly int _fieldHeight = BGConstants.FIELD_HEIGHT;
 
         public BGField(int[][] gameField)
         {
-            this.gameField = gameField;
+            _gameField = gameField;
         }
 
         public BGField()
         {
-            gameField = new int[fieldWidth][];
-            for (int i = 0; i < fieldWidth; i++)
+            _gameField = new int[_fieldWidth][];
+            for (int i = 0; i < _fieldWidth; i++)
             {
-                gameField[i] = new int[fieldHeight];
+                _gameField[i] = new int[_fieldHeight];
             }
         }
 
         public int GetWidth()
         {
-            return fieldWidth;
+            return _fieldWidth;
         }
 
         public int GetHeight()
         {
-            return fieldHeight;
+            return _fieldHeight;
         }
 
         public int GetValueByPosition(int x, int y)
         {
-            return gameField[x][y];
+            return _gameField[x][y];
         }
 
         public void SetValueAtPosition(int x, int y, int value)
         {
-            gameField[x][y] = value;
+            _gameField[x][y] = value;
         }
     }
 }

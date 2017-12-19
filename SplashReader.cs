@@ -6,7 +6,7 @@ namespace BrickGameEmulator
 {
     public class SplashReader
     {
-        public BGField[] Read(String filename)
+        public BGField[] Read(string filename)
         {
             List<BGField> frames = new List<BGField>();
             

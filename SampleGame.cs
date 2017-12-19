@@ -4,40 +4,56 @@ namespace BrickGameEmulator
 {
     public class SampleGame : Game
     {
-        private BGSurface surface;
+        private BGField field;
 
-        private bool pause;
+        private int x = 0;
+        private int y = 0;
         
-        public void Create(BGSurface surface)
+        public override void Create()
         {
-            this.surface = surface;
+            field = new BGField();
         }
 
-        public void Run(ConsoleKey key)
+        public override BGField Run(ConsoleKey key)
         {
-            if (pause) return;
-            
-            surface.Render(new BGField());
+            if (key == ConsoleKey.UpArrow) Up();
+            if (key == ConsoleKey.DownArrow) Down();
+            if (key == ConsoleKey.RightArrow) Right();
+            if (key == ConsoleKey.LeftArrow) Left();
+            return field;
+        }
+        
+        private void Up()
+        {
+            field.SetValueAtPosition(x, y, 0);
+            if (y != 0) y--;
+            field.SetValueAtPosition(x, y, 1);
         }
 
-        public void SplashScreen()
+        private void Down()
         {
-            surface.SetSplash("sample_game.sph");
+            field.SetValueAtPosition(x, y, 0);
+            if (y != field.GetHeight() - 1) y++;
+            field.SetValueAtPosition(x, y, 1);
+        }
+        
+        private void Right()
+        {
+            field.SetValueAtPosition(x, y, 0);
+            if (x != field.GetWidth() - 1) x++;
+            field.SetValueAtPosition(x, y, 1);
+        }
+        
+        private void Left()
+        {
+            field.SetValueAtPosition(x, y, 0);
+            if (x != 0) x--;
+            field.SetValueAtPosition(x, y, 1);
         }
 
-        public void Start()
+        public override string SplashScreen()
         {
-            pause = false;
-        }
-
-        public void Pause()
-        {
-            pause = true;
-        }
-
-        public void Destroy(BGDataStorage storage)
-        {
-            storage.Commit();
+            return "sample_game.sph";
         }
     }
 }
