@@ -13,7 +13,7 @@ namespace BrickGameEmulator
         
         public BGDataStorage(string name)
         {
-            _path = Environment.CurrentDirectory + @"\"  + name;
+            _path = name;
             _init();
         }
 

@@ -12,6 +12,8 @@ namespace BrickGameEmulator
         private int y = 5;
         private int score = 0;
 
+        private int testY = 0;
+
         public override void Create()
         {
             bgField = new BGField(); 
@@ -30,7 +32,22 @@ namespace BrickGameEmulator
                 score = 0;
                 SetScore(score);
             }
+            Test();
             return bgField;
+        }
+
+        public void Test()
+        {
+            bgField.SetValueAtPosition(0, testY, 0);
+            if (testY != 19)
+            {
+                testY++;
+            }
+            else
+            {
+                testY = 0;
+            }
+            bgField.SetValueAtPosition(0, testY, 1);
         }
         
         public override string SplashScreen()

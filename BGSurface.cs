@@ -71,7 +71,6 @@ namespace BrickGameEmulator
             {
                 _render(bgField);
                 _renderStatusPanel();
-                
             }
         }
 
@@ -114,16 +113,13 @@ namespace BrickGameEmulator
             {
                 for (int j = 0; j < 20; j++)
                 {
-                    int value = bgField.GetValueByPosition(i, j);
-                    if (value == 0)
+                    if (bgField.GetValueByPosition(i, j) == 0)
                     {
-                        PrintAtPosition(surfacePositionX + 2 + (i * 2), j + 1, "▣", ConsoleColor.White);
-                        PrintAtPosition(surfacePositionX + 2 + (i * 2 + 1), j + 1, borderSymbol, ConsoleColor.White);
+                        PrintAtPosition(surfacePositionX + 2 + (i * 2), j + 1, "  ", ConsoleColor.White);
                     }
                     else
                     {
-                        PrintAtPosition(surfacePositionX + 2 + (i * 2), j + 1, "▣", ConsoleColor.Black);
-                        PrintAtPosition(surfacePositionX + 2 + (i * 2 + 1), j + 1, borderSymbol, ConsoleColor.White);
+                        PrintAtPosition(surfacePositionX + 2 + (i * 2), j + 1, "▣ ", ConsoleColor.Black);
                     }   
                 }
             }

@@ -25,7 +25,7 @@ namespace BrickGameEmulator
 
         public void SetSpeed(int speed)
         {
-            _surface.Speed = 11 - speed;
+            _surface.Speed = 26 - speed;
         }
 
         public bool IsPause()

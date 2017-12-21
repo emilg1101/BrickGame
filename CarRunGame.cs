@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace BrickGameEmulator
 {
@@ -8,7 +9,7 @@ namespace BrickGameEmulator
         private BGField field;
 
         private bool pause;
-        private bool isGameOver = false;
+        private bool isGameOver;
 
         private int x = 2;
         private int y = 16;
@@ -32,15 +33,19 @@ namespace BrickGameEmulator
             new[] {0, 1, 0, 1}
         };
 
+        private Random _random;        
+
         public override void Create()
         {
             field = new BGField();
             cars = new List<int[]>();
+            _random = new Random();
 
             x = 2;
-            speed = 10;
+            speed = 25;
             score = 0;
             carsOut = 0;
+            count = 0;
             playerPosition = 1;
             
             SetScore(score);
@@ -66,27 +71,23 @@ namespace BrickGameEmulator
                     isGameOver = false;
                     return field;
                 }
-                else
-                {
-                    DrawCar(playerPosition == 1 ? 2 : 5, y);
-                    return field;
-                }
+                
+                DrawCar(playerPosition == 1 ? 2 : 5, y);
+                return field;
             }
-            
-            if (pause || isGameOver) return field;
             
             if (key == ConsoleKey.RightArrow)
             {
                 Right();
             }
-            else if (key == ConsoleKey.LeftArrow)
+            
+            if (key == ConsoleKey.LeftArrow)
             {
                 Left();
             }
-            else
-            {
-                DrawCar(playerPosition == 1 ? 2 : 5, y);
-            }
+            
+            DrawCar(playerPosition == 1 ? 2 : 5, y);
+            
             
             if (time % speed == 0) Draw();
             
@@ -98,8 +99,9 @@ namespace BrickGameEmulator
         public void Draw()
         {
             if (isGameOver) return;
-            MoveBorders();
+            
             DrawCars();
+            MoveBorders();
             
             if ((count / 4) % 2 == 0 && count % 4 == 1) cars.Add(new int[] {GetNext(1, 2), -4});
             
@@ -108,17 +110,28 @@ namespace BrickGameEmulator
 
         public void DrawCars()
         {
-            for (int i = carsOut; i < cars.Count; i++)
+            for (int i = 0; i < cars.Count; i++)
             {
                 int carX = cars[i][0];
                 int carY = cars[i][1];
 
+                if (carY > 20)
+                {
+                    cars.RemoveAt(i);
+                    i--;
+                    continue;
+                }
+
                 if ((carX == 1 ? 1 : 2) == playerPosition && carY >= 13 && carY <= 19)
                 {
-                    if (carY != 13) playerPosition = playerPosition == 1 ? 2 : 1;
+                    if (carY > 13) playerPosition = playerPosition == 1 ? 2 : 1;
                     
                     isGameOver = true;
-                    return;
+                    carY--;
+                    ClearCar(carX == 1 ? 2 : 5, carY - 1);
+                    DrawCar(carX == 1 ? 2 : 5, carY);
+                    break;
+                    
                 }
                 
                 ClearCar(carX == 1 ? 2 : 5, carY - 1);
@@ -189,11 +202,7 @@ namespace BrickGameEmulator
 
         public void DrawCar(int x, int y)
         {
-            if (y > 19)
-            {
-                //if (position > -1) cars.RemoveAt(position);
-                return;
-            }
+            if (y > 19) return;
             
             if (y == 17)
             {
@@ -265,11 +274,7 @@ namespace BrickGameEmulator
 
         public void ClearCar(int x, int y)
         {
-            if (y > 19)
-            {
-                carsOut++;
-                return;
-            }
+            if (y > 19) return;
 
             if (y == 17)
             {
@@ -349,16 +354,10 @@ namespace BrickGameEmulator
         {
             return "carsrun.sph";
         }
-        
-        public override void Destroy(BGDataStorage storage)
-        {
-            storage.PutInt("test", 34567);
-            base.Destroy(storage);
-        }
 
-        private static int GetNext(int min, int max)
+        private int GetNext(int min, int max)
         { 
-            return new Random().Next(min - 1, max + 1);
+            return _random.Next(min - 1, max + 1);
         }
     }
 }
