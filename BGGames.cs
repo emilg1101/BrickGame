@@ -5,8 +5,7 @@
         private readonly Game[] _games =
         {
             new CarRunGame(),
-            new SampleGame(),
-            new Tanki()
+            new TetrisGame()
         };
 
         public int GetCount()

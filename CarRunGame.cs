@@ -14,6 +14,12 @@ namespace BrickGameEmulator
         private int x = 2;
         private int y = 16;
 
+        public int X
+        {
+            get { return x; }
+            set => x = value;
+        }
+
         private int playerPosition = 1;
 
         private int count;

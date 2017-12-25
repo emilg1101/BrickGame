@@ -37,7 +37,7 @@
         }
 
         public void SetValueAtPosition(int x, int y, int value)
-        {
+        { 
             _gameField[x][y] = value;
         }
     }
