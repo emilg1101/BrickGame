@@ -3,17 +3,19 @@ BrickGameEmulator
 
 Эмулятор игровой платформы BrickGame.
 
+![alt text](https://raw.githubusercontent.com/emilg1101/BrickGame/master/Screenshots/screen1.png)
+![alt text](https://raw.githubusercontent.com/emilg1101/BrickGame/master/Screenshots/screen2.png)
+![alt text](https://raw.githubusercontent.com/emilg1101/BrickGame/master/Screenshots/screen3.png)
+
 Разработчики
 ------------
 
-1. ---
-2. ---
-3. ---
+1. Гафиятуллин Эмиль, группа 11-709
+2. Садыков Булат, группа 11-708
+3. Козлов Ярослав, группа 11-707
 
 Документация
 ---------------------
-
-=======
 
 ### Class BGField
 
