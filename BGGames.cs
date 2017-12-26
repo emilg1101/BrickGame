@@ -7,7 +7,8 @@
             new CarRunGame(),
             new TankGame(), 
             new ShootGame(),
-            new TetrisGame()
+            new TetrisGame(),
+            new YukiGame()
         };
 
         public int GetCount()
