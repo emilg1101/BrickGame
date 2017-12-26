@@ -54,10 +54,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleGame.cs" />
+    <Compile Include="ShootGame.cs"/>
     <Compile Include="SplashReader.cs" />
+    <Compile Include="TankGame.cs"/>
     <Compile Include="TetrisGame.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\ShootGame.sph"/>
+    <Content Include="bin\Debug\TetrisGame.sph"/>
     <Content Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

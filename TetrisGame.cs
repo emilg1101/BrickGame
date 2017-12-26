@@ -102,7 +102,7 @@ namespace BrickGameEmulator
 
         public override string SplashScreen()
         {
-            return "tanki.sph";
+            return "TetrisGame.sph";
         }
 
         public void Draw(int x, int y, int[][] figure)

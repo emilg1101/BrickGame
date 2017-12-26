@@ -5,6 +5,8 @@
         private readonly Game[] _games =
         {
             new CarRunGame(),
+            new TankGame(), 
+            new ShootGame(),
             new TetrisGame()
         };
 

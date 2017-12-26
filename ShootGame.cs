@@ -187,7 +187,8 @@ namespace BrickGameEmulator
             {
                 if (player.update(key, field, Arrows))
                 {
-                    Thread.Sleep(10000);
+                    Thread.Sleep(100);
+                    Create();
                 }
 
                 PlCont = 0;
@@ -215,7 +216,8 @@ namespace BrickGameEmulator
             {
                 if(field.GetValueByPosition(i,19) == 2)
                 {
-                    Thread.Sleep(10000);
+                    Thread.Sleep(100);
+                    Create();
                 }
             }
             return field;

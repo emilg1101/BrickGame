@@ -100,18 +100,22 @@ namespace TankGameNamespace
                 case 1:
                     field.SetValueAtPosition(left - 1, top + 1, value);
                     field.SetValueAtPosition(left + 1, top + 1, value);
+                    //if (type) field.SetValueAtPosition(left, top + 1, value);
                     break;
                 case 2:
                     field.SetValueAtPosition(left - 1, top - 1, value);
                     field.SetValueAtPosition(left + 1, top - 1, value);
+                    //if (type) field.SetValueAtPosition(left, top + 1, value);
                     break;
                 case 3:
                     field.SetValueAtPosition(left + 1, top - 1, value);
                     field.SetValueAtPosition(left + 1, top + 1, value);
+                    //if (type) field.SetValueAtPosition(left, top + 1, value);
                     break;
                 case 4:
                     field.SetValueAtPosition(left - 1, top - 1, value);
                     field.SetValueAtPosition(left - 1, top + 1, value);
+                    //if (type) field.SetValueAtPosition(left, top + 1, value);
                     break;
             }
         }
